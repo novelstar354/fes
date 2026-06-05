@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+<title>集え！オタクたち！｜文化祭有志企画</title>
+
+<meta name="description" content="アニメ・ゲーム・漫画・音楽・創作好き集結！文化祭有志企画『集え！オタクたち！』公式サイト">
+
+<style>
+
+/* =========================
+   RESET
+========================= */
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+html{
+scroll-behavior:smooth;
+}
+
+body{
+font-family:"Noto Sans JP",sans-serif;
+background:
+linear-gradient(rgba(10,10,20,0.85),rgba(10,10,20,0.9)),
+url("https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=1400&auto=format&fit=crop");
+background-size:cover;
+background-attachment:fixed;
+color:white;
+overflow-x:hidden;
+background-attachment: fixed;
+animation: bgMove 18s ease infinite;
+user-select: none;
+-webkit-user-select: none;
+}
+@keyframes bgMove{
+
+0%{
+background-position:center top;
+}
+
+50%{
+background-position:center bottom;
+}
+
+100%{
+background-position:center top;
+}
+
+}
+/* =========================
+   HEADER
+========================= */
+
+header{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+padding:18px 40px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+background:rgba(0,0,0,0.45);
+backdrop-filter:blur(10px);
+z-index:1000;
+border-bottom:1px solid rgba(255,255,255,0.12);
+}
+
+.logo{
+font-size:1.5rem;
+font-weight:bold;
+letter-spacing:2px;
+color:#8ddcff;
+text-shadow:0 0 10px rgba(141,220,255,0.8);
+}
+
+nav{
+display:flex;
+gap:25px;
+}
+
+nav a{
+color:white;
+text-decoration:none;
+font-size:0.95rem;
+transition:0.3s;
+position:relative;
+}
+
+nav a:hover{
+color:#8ddcff;
+}
+
+nav a::after{
+content:"";
+position:absolute;
+left:0;
+bottom:-5px;
+width:0%;
+height:2px;
+background:#8ddcff;
+transition:0.3s;
+}
+
+nav a:hover::after{
+width:100%;
+}
+
+/* =========================
+   HERO
+========================= */
+
+.hero{
+min-height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+text-align:center;
+padding:40px;
+}
+
+.hero-box{
+background:rgba(255,255,255,0.06);
+padding:50px;
+border-radius:24px;
+backdrop-filter:blur(10px);
+border:1px solid rgba(255,255,255,0.1);
+box-shadow:
+0 0 30px rgba(0,180,255,0.2),
+0 0 80px rgba(180,0,255,0.12);
+max-width:900px;
+animation:fadeUp 1.2s ease;
+}
+
+.hero h1{
+font-size:clamp(3rem,9vw,6rem);
+margin-bottom:20px;
+background:linear-gradient(90deg,#7cecff,#d78fff,#fff38a);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+text-shadow:0 0 20px rgba(255,255,255,0.2);
+}
+
+.hero p{
+font-size:1.2rem;
+opacity:0.9;
+line-height:1.8;
+margin-bottom:30px;
+}
+.hero-box{
+position:relative;
+overflow:hidden;
+}
+
+.hero-box::before{
+content:"";
+position:absolute;
+inset:-200%;
+background:
+linear-gradient(
+120deg,
+transparent,
+rgba(255,255,255,0.08),
+transparent
+);
+
+transform:rotate(25deg);
+
+animation:
+shine 7s linear infinite;
+}
+
+@keyframes shine{
+
+0%{
+transform:
+translateX(-100%)
+rotate(25deg);
+}
+
+100%{
+transform:
+translateX(100%)
+rotate(25deg);
+}
+
+}
+.hero-btn{
+display:inline-block;
+padding:14px 35px;
+border-radius:999px;
+background:linear-gradient(90deg,#66d9ff,#c66cff);
+color:white;
+text-decoration:none;
+font-weight:bold;
+transition:0.3s;
+box-shadow:0 0 20px rgba(120,200,255,0.4);
+}
+
+.hero-btn:hover{
+transform:translateY(-4px) scale(1.05);
+box-shadow:0 0 35px rgba(120,200,255,0.8);
+}
+
+/* =========================
+   SECTION
+========================= */
+
+section{
+padding:110px 25px;
+max-width:1100px;
+margin:auto;
+}
+
+.section-title{
+font-size:2.2rem;
+margin-bottom:50px;
+text-align:center;
+position:relative;
+}
+
+.section-title::after{
+content:"";
+display:block;
+width:120px;
+height:4px;
+margin:15px auto 0;
+border-radius:999px;
+background:linear-gradient(90deg,#6ad8ff,#dd7dff);
+}
+
+/* =========================
+   CARDS
+========================= */
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+gap:30px;
+}
+
+.card{
+background:rgba(255,255,255,0.06);
+padding:25px;
+border-radius:20px;
+backdrop-filter:blur(6px);
+border:1px solid rgba(255,255,255,0.08);
+transition:0.35s;
+overflow:hidden;
+position:relative;
+}
+
+.card::before{
+content:"";
+position:absolute;
+inset:0;
+background:linear-gradient(135deg,
+rgba(0,200,255,0.08),
+rgba(220,120,255,0.06));
+opacity:0;
+transition:0.4s;
+}
+
+.card:hover::before{
+opacity:1;
+}
+
+.card:hover{
+transform:translateY(-10px);
+box-shadow:0 0 25px rgba(120,200,255,0.25);
+}
+
+.card img{
+width:100%;
+height:220px;
+object-fit:cover;
+border-radius:14px;
+margin-bottom:18px;
+}
+
+.card h3{
+margin-bottom:12px;
+font-size:1.25rem;
+color:#9fe8ff;
+}
+
+.card p{
+opacity:0.88;
+line-height:1.7;
+}
+
+/* =========================
+   TIMETABLE
+========================= */
+
+.timeline{
+display:flex;
+flex-direction:column;
+gap:25px;
+}
+
+.time-item{
+background:rgba(255,255,255,0.06);
+padding:25px;
+border-left:5px solid #7ddcff;
+border-radius:12px;
+}
+
+/* =========================
+   GALLERY
+========================= */
+
+.gallery{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:18px;
+}
+
+.gallery img{
+width:100%;
+height:240px;
+object-fit:cover;
+border-radius:14px;
+transition:0.4s;
+}
+
+.gallery img:hover{
+transform:scale(1.05);
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+footer{
+padding:40px;
+text-align:center;
+background:rgba(0,0,0,0.45);
+font-size:0.9rem;
+opacity:0.7;
+margin-top:50px;
+}
+
+/* =========================
+   ANIMATION
+========================= */
+
+.fade{
+opacity:0;
+transform:translateY(40px);
+transition:1s;
+}
+
+.fade.show{
+opacity:1;
+transform:translateY(0);
+}
+
+@keyframes fadeUp{
+from{
+opacity:0;
+transform:translateY(40px);
+}
+to{
+opacity:1;
+transform:translateY(0);
+}
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:768px){
+
+header{
+padding:16px 20px;
+}
+
+nav{
+gap:15px;
+flex-wrap:wrap;
+justify-content:flex-end;
+left:auto;
+display:flex;
+justify-content:flex-start;
+align-items:flex-start;
+}
+
+.hero h1{
+font-size:2.5rem;
+}
+
+.hero-box{
+padding:35px 25px;
+}
+
+.section-title{
+font-size:1.7rem;
+}
+
+}
+/* =========================
+   HEADER ANIMATION
+========================= */
+
+header{
+transition:
+transform 0.45s ease,
+opacity 0.45s ease;
+}
+
+/* 消える */
+.hide-header{
+transform:translateY(-120%);
+opacity:0;
+pointer-events:none;
+}
+
+/* =========================
+   HAMBURGER BUTTON
+========================= */
+
+.menu-btn{
+position:fixed;
+top:20px;
+right:20px;
+width:54px;
+height:54px;
+border:none;
+border-radius:14px;
+background:rgba(0,0,0,0.55);
+backdrop-filter:blur(8px);
+cursor:pointer;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+gap:6px;
+z-index:2000;
+
+opacity:0;
+pointer-events:none;
+transform:translateY(-20px);
+
+transition:
+0.35s,
+box-shadow 0.35s;
+}
+
+.menu-btn.show-btn{
+opacity:1;
+pointer-events:auto;
+transform:translateY(0);
+}
+
+.menu-btn:hover{
+box-shadow:
+0 0 20px rgba(120,220,255,0.7);
+}
+
+.menu-btn span{
+display:block;
+width:28px;
+height:3px;
+border-radius:999px;
+background:white;
+transition:0.35s;
+}
+
+/* ×変形 */
+.menu-btn.active span:nth-child(1){
+transform:
+translateY(9px)
+rotate(45deg);
+}
+
+.menu-btn.active span:nth-child(2){
+opacity:0;
+}
+
+.menu-btn.active span:nth-child(3){
+transform:
+translateY(-9px)
+rotate(-45deg);
+}
+/* =========================
+   MOBILE MENU BASE
+========================= */
+
+.mobile-menu{
+position:fixed;
+top:0;
+right:-100%;
+
+width:300px;
+height:100vh;
+
+background:rgba(10,10,20,0.97);
+backdrop-filter:blur(18px);
+
+display:flex;
+flex-direction:column;
+
+padding:120px 35px;
+gap:28px;
+
+transition:0.45s ease;
+
+z-index:1900;
+}
+
+/* 開いた */
+.mobile-menu.open{
+right:0;
+}
+
+/* リンク */
+.mobile-menu a{
+color:white;
+text-decoration:none;
+font-size:1.2rem;
+padding-bottom:12px;
+
+border-bottom:
+1px solid rgba(255,255,255,0.08);
+
+transition:0.3s;
+}
+
+.mobile-menu a:hover{
+color:#8ddcff;
+padding-left:10px;
+}
+
+/* =========================
+   BACK TO TOP BUTTON
+========================= */
+
+#backToTop{
+position:fixed;
+right:25px;
+bottom:25px;
+
+width:58px;
+height:58px;
+
+border:none;
+border-radius:50%;
+
+font-size:22px;
+font-weight:bold;
+color:white;
+
+cursor:pointer;
+
+background:
+linear-gradient(
+135deg,
+rgba(80,180,255,0.9),
+rgba(200,100,255,0.9)
+);
+
+box-shadow:
+0 0 18px rgba(120,220,255,0.45),
+0 0 30px rgba(200,120,255,0.2);
+
+backdrop-filter:blur(8px);
+
+z-index:3000;
+
+opacity:0;
+pointer-events:none;
+
+transform:
+translateY(30px)
+scale(0.9);
+
+transition:
+0.4s ease;
+}
+
+/* 表示 */
+#backToTop.show{
+opacity:1;
+pointer-events:auto;
+
+transform:
+translateY(0)
+scale(1);
+}
+
+/* ホバー */
+#backToTop:hover{
+transform:
+translateY(-6px)
+scale(1.08);
+
+box-shadow:
+0 0 28px rgba(120,220,255,0.85),
+0 0 45px rgba(200,120,255,0.45);
+}
+
+/* 浮遊 */
+#backToTop{
+animation:
+floatBtn 3s ease-in-out infinite;
+}
+
+@keyframes floatBtn{
+
+0%{
+transform:translateY(0);
+}
+
+50%{
+transform:translateY(-8px);
+}
+
+100%{
+transform:translateY(0);
+}
+
+
+}
+/* =========================
+   MENU OVERLAY
+========================= */
+
+.menu-overlay{
+position:fixed;
+inset:0;
+
+background:rgba(0,0,0,0.35);
+
+backdrop-filter:blur(8px);
+-webkit-backdrop-filter:blur(8px);
+
+opacity:0;
+pointer-events:none;
+
+transition:0.35s ease;
+
+z-index:1800;
+}
+
+/* 表示 */
+.menu-overlay.show{
+opacity:1;
+pointer-events:auto;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<div class="logo">
+集え！オタクたち！
+</div>
+
+<nav>
+<a href="#about">企画概要</a>
+<a href="#access">アクセス</a>
+</nav>
+</header>
+<div class="menu-overlay"></div>
+<!-- ハンバーガーメニュー -->
+<div class="mobile-menu">
+
+<a href="#about">企画概要</a>
+<a href="#access">アクセス</a>
+
+</div>
+<!-- HERO -->
+<div class="hero">
+
+<div class="hero-box">
+
+<h1>集え！オタクたち！</h1>
+
+<p>
+アニメ、ゲーム、漫画、ボカロ、創作。<br>
+好きなものを語れる場所が、ここにある。<br><br>
+</p>
+
+<a href="#about" class="hero-btn">
+詳細を見る
+</a>
+
+</div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+
+<h2 class="section-title fade">
+企画概要
+</h2>
+
+<div class="grid">
+
+<div class="card fade">
+<img src="">
+
+<h3>〇〇エリアコーナー</h3>
+
+<p>
+</p>
+
+</div>
+
+<div class="card fade">
+<img src="">
+
+<h3>〇〇エリア</h3>
+
+<p>
+</p>
+
+</div>
+
+
+</div>
+
+</section>
+
+
+
+
+<!-- ACCESS -->
+<section id="access">
+
+<h2 class="section-title fade">
+アクセス
+</h2>
+
+<div class="card fade">
+
+<h3>○○高校 文化祭会場</h3>
+
+<p>
+開催日：2026年○月○日<br>
+場所：本郷中学校 ◯号館◯階 <br><br>
+
+オタクたちの来場を待っています。
+</p>
+
+</div>
+
+</section>
+
+<footer class="fade">
+© 2026 集え！オタクたち！
+</footer>
+<!-- 上へ戻るボタン -->
+<button id="backToTop">▲</button>
+<script>
+
+const observer = new IntersectionObserver((entries)=>{
+
+entries.forEach(entry=>{
+
+if(entry.isIntersecting){
+entry.target.classList.add("show");
+}
+
+});
+
+},{
+threshold:0.15
+});
+
+document.querySelectorAll(".fade").forEach(el=>{
+observer.observe(el);
+});
+
+document.querySelectorAll(".fade").forEach(el=>{
+observer.observe(el);
+});
+
+
+/* =========================
+   HEADER & HAMBURGER
+========================= */
+
+const header = document.querySelector("header");
+const mobileMenu = document.querySelector(".mobile-menu");
+
+/* ハンバーガー生成 */
+const menuBtn = document.createElement("button");
+
+menuBtn.classList.add("menu-btn");
+
+menuBtn.innerHTML = `
+<span></span>
+<span></span>
+<span></span>
+`;
+
+document.body.appendChild(menuBtn);
+
+/* =========================
+   MENU OPEN
+========================= */
+
+const overlay =
+document.querySelector(".menu-overlay");
+
+menuBtn.addEventListener("click", ()=>{
+
+mobileMenu.classList.toggle("open");
+menuBtn.classList.toggle("active");
+overlay.classList.toggle("show");
+
+});
+/* =========================
+   OVERLAY CLOSE
+========================= */
+
+overlay.addEventListener("click", ()=>{
+
+mobileMenu.classList.remove("open");
+menuBtn.classList.remove("active");
+overlay.classList.remove("show");
+
+});
+/* =========================
+   SCROLL
+========================= */
+
+let lastScroll = 0;
+
+window.addEventListener("scroll", ()=>{
+
+const currentScroll = window.pageYOffset;
+
+/* 下へスクロール */
+if(currentScroll > lastScroll && currentScroll > 100){
+
+header.classList.add("hide-header");
+
+/* ボタン表示 */
+menuBtn.classList.add("show-btn");
+
+}
+
+/* 上へスクロール */
+else{
+
+header.classList.remove("hide-header");
+
+/* ボタン非表示 */
+menuBtn.classList.remove("show-btn");
+
+/* メニュー閉じる */
+mobileMenu.classList.remove("open");
+menuBtn.classList.remove("active");
+
+}
+
+lastScroll = currentScroll;
+
+});
+
+/* =========================
+   BACK TO TOP
+========================= */
+
+const backToTop =
+document.getElementById("backToTop");
+
+/* スクロールで表示 */
+window.addEventListener("scroll", ()=>{
+
+if(window.scrollY > 350){
+
+backToTop.classList.add("show");
+
+}else{
+
+backToTop.classList.remove("show");
+
+}
+
+});
+
+/* 押したら上へ */
+backToTop.addEventListener("click", ()=>{
+
+window.scrollTo({
+top:0,
+behavior:"smooth"
+});
+
+});
+document.querySelectorAll(".mobile-menu a")
+.forEach(link=>{
+
+link.addEventListener("click",()=>{
+
+mobileMenu.classList.remove("open");
+menuBtn.classList.remove("active");
+overlay.classList.remove("show");
+
+});
+
+});
+</script>
+</body>
+</html>
