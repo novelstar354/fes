@@ -661,11 +661,311 @@ z-index:1800;
 opacity:1;
 pointer-events:auto;
 }
+/* =========================
+   LOADING SCREEN
+========================= */
+
+#loadingScreen{
+position:fixed;
+inset:0;
+z-index:99999;
+
+display:flex;
+justify-content:center;
+align-items:center;
+
+background:
+linear-gradient(rgba(5,5,15,0.88),rgba(5,5,15,0.92)),
+url("https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=1400&auto=format&fit=crop");
+
+background-size:cover;
+background-position:center;
+
+overflow:hidden;
+
+transition:
+opacity 1s ease,
+visibility 1s ease;
+}
+
+/* 消える */
+#loadingScreen.hide{
+opacity:0;
+visibility:hidden;
+}
+
+/* 背景演出 */
+.loading-bg{
+position:absolute;
+inset:0;
+
+background:
+radial-gradient(circle at center,
+rgba(120,220,255,0.18),
+transparent 60%);
+
+animation:
+pulseBg 4s ease infinite;
+}
+
+@keyframes pulseBg{
+
+0%{
+transform:scale(1);
+opacity:0.6;
+}
+
+50%{
+transform:scale(1.1);
+opacity:1;
+}
+
+100%{
+transform:scale(1);
+opacity:0.6;
+}
+
+}
+
+/* ガラスボックス */
+.loading-box{
+position:relative;
+z-index:2;
+
+width:min(90%,500px);
+
+padding:45px 35px;
+
+border-radius:28px;
+
+background:rgba(255,255,255,0.08);
+
+backdrop-filter:blur(14px);
+
+border:
+1px solid rgba(255,255,255,0.12);
+
+box-shadow:
+0 0 35px rgba(0,180,255,0.2),
+0 0 80px rgba(180,0,255,0.12);
+
+text-align:center;
+}
+
+/* タイトル */
+.loading-title{
+font-size:clamp(2.2rem,7vw,4rem);
+
+margin-bottom:35px;
+
+background:
+linear-gradient(
+90deg,
+#7cecff,
+#d78fff,
+#fff38a
+);
+
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+
+text-shadow:
+0 0 20px rgba(255,255,255,0.15);
+
+animation:
+titleGlow 2.5s ease infinite;
+}
+
+@keyframes titleGlow{
+
+0%{
+filter:brightness(1);
+}
+
+50%{
+filter:brightness(1.3);
+}
+
+100%{
+filter:brightness(1);
+}
+
+}
+
+/* バー */
+.loading-bar{
+width:100%;
+height:14px;
+
+border-radius:999px;
+
+overflow:hidden;
+
+background:
+rgba(255,255,255,0.08);
+
+box-shadow:
+inset 0 0 10px rgba(255,255,255,0.1);
+}
+
+/* 進行バー */
+.loading-fill{
+height:100%;
+width:0%;
+
+border-radius:999px;
+
+background:
+linear-gradient(
+90deg,
+#66d9ff,
+#c66cff,
+#fff38a
+);
+
+box-shadow:
+0 0 20px rgba(120,220,255,0.8);
+
+animation:
+loadingFill 2.8s ease forwards;
+}
+
+@keyframes loadingFill{
+
+0%{
+width:0%;
+}
+
+15%{
+width:15%;
+}
+
+40%{
+width:45%;
+}
+
+70%{
+width:78%;
+}
+
+100%{
+width:100%;
+}
+
+}
+
+/* テキスト */
+.loading-text{
+margin-top:20px;
+
+font-size:0.95rem;
+letter-spacing:4px;
+
+opacity:0.8;
+
+animation:
+blinkText 1.4s infinite;
+}
+
+@keyframes blinkText{
+
+0%,100%{
+opacity:0.4;
+}
+
+50%{
+opacity:1;
+}
+
+}
+/* サブ文章 */
+.loading-sub{
+margin-bottom:28px;
+
+font-size:1rem;
+line-height:1.9;
+
+opacity:0.82;
+
+color:#dfefff;
+
+text-shadow:
+0 0 10px rgba(120,220,255,0.25);
+
+animation:
+fadeText 2.5s ease infinite;
+}
+
+@keyframes fadeText{
+
+0%{
+opacity:0.5;
+}
+
+50%{
+opacity:1;
+}
+
+100%{
+opacity:0.5;
+}
+
+}
+.loading-title{
+animation:
+titleGlow 2.5s ease infinite,
+floatTitle 4s ease-in-out infinite;
+}
+
+@keyframes floatTitle{
+
+0%{
+transform:translateY(0px);
+}
+
+50%{
+transform:translateY(-6px);
+}
+
+100%{
+transform:translateY(0px);
+}
+
+}
 </style>
 </head>
 
 <body>
+<!-- =========================
+   LOADING SCREEN
+========================= -->
+<!-- =========================
+   LOADING SCREEN
+========================= -->
+<div id="loadingScreen">
 
+<div class="loading-bg"></div>
+
+<div class="loading-box">
+
+<h1 class="loading-title">
+集え！オタクたち！
+</h1>
+
+<p class="loading-sub">
+お前もオタクにならないか
+</p>
+
+<div class="loading-bar">
+<div class="loading-fill"></div>
+</div>
+
+<p class="loading-text">
+NOW LOADING...
+</p>
+
+</div>
+</div>
 <header>
 <div class="logo">
 集え！オタクたち！
@@ -916,6 +1216,22 @@ menuBtn.classList.remove("active");
 overlay.classList.remove("show");
 
 });
+
+});
+/* =========================
+   LOADING SCREEN
+========================= */
+
+window.addEventListener("load", ()=>{
+
+const loading =
+document.getElementById("loadingScreen");
+
+setTimeout(()=>{
+
+loading.classList.add("hide");
+
+},2800);
 
 });
 </script>
