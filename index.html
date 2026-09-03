@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
@@ -6,12 +7,14 @@
 
 <title>なんでもや｜文化祭有志企画</title>
 <link rel="icon" href="アイコン.png">
-  <meta property="og:locale" content="ja_JP" />
+<meta property="og:locale" content="ja_JP" />
+
 <style>
 
 /* =========================
    RESET
 ========================= */
+
 *{
 margin:0;
 padding:0;
@@ -31,11 +34,11 @@ background-size:cover;
 background-attachment:fixed;
 color:white;
 overflow-x:hidden;
-background-attachment: fixed;
-animation: bgMove 18s ease infinite;
-user-select: none;
--webkit-user-select: none;
+animation:bgMove 18s ease infinite;
+user-select:none;
+-webkit-user-select:none;
 }
+
 @keyframes bgMove{
 
 0%{
@@ -51,6 +54,7 @@ background-position:center top;
 }
 
 }
+
 /* =========================
    HEADER
 ========================= */
@@ -68,6 +72,15 @@ background:rgba(0,0,0,0.45);
 backdrop-filter:blur(10px);
 z-index:1000;
 border-bottom:1px solid rgba(255,255,255,0.12);
+transition:
+transform 0.3s ease,
+opacity 0.3s ease;
+}
+
+.logo-wrap{
+display:flex;
+align-items:center;
+gap:12px;
 }
 
 .logo{
@@ -111,6 +124,121 @@ width:100%;
 }
 
 /* =========================
+   LOGO ICON
+========================= */
+
+.logo-icon{
+width:38px;
+height:38px;
+cursor:pointer;
+filter:drop-shadow(0 0 6px rgba(57,213,255,.8));
+transition:0.3s;
+}
+
+.logo-icon:hover{
+transform:scale(1.15) rotate(10deg);
+}
+
+/* =========================
+   LOGO IMAGE MODAL
+========================= */
+
+.logo-modal{
+position:fixed;
+inset:0;
+background:rgba(0,0,0,0.78);
+backdrop-filter:blur(10px);
+-webkit-backdrop-filter:blur(10px);
+
+display:flex;
+justify-content:center;
+align-items:center;
+
+padding:30px;
+
+opacity:0;
+visibility:hidden;
+pointer-events:none;
+
+transition:
+opacity 0.3s ease,
+visibility 0.3s ease;
+
+z-index:10000;
+}
+
+.logo-modal.show{
+opacity:1;
+visibility:visible;
+pointer-events:auto;
+}
+
+.logo-modal-content{
+position:relative;
+max-width:90vw;
+max-height:85vh;
+
+transform:scale(0.75);
+opacity:0;
+
+transition:
+transform 0.35s cubic-bezier(.2,.8,.2,1),
+opacity 0.3s ease;
+}
+
+.logo-modal.show .logo-modal-content{
+transform:scale(1);
+opacity:1;
+}
+
+.logo-modal-content img{
+display:block;
+max-width:90vw;
+max-height:85vh;
+width:auto;
+height:auto;
+
+object-fit:contain;
+
+border-radius:20px;
+
+box-shadow:
+0 0 30px rgba(120,220,255,0.45),
+0 0 80px rgba(200,100,255,0.3);
+}
+
+.logo-modal-close{
+position:absolute;
+top:-18px;
+right:-18px;
+
+width:46px;
+height:46px;
+
+border:none;
+border-radius:50%;
+
+background:rgba(0,0,0,0.75);
+color:white;
+
+font-size:25px;
+line-height:1;
+
+cursor:pointer;
+
+display:flex;
+align-items:center;
+justify-content:center;
+
+transition:0.25s;
+}
+
+.logo-modal-close:hover{
+background:#ff4f4f;
+transform:scale(1.1);
+}
+
+/* =========================
    HERO
 ========================= */
 
@@ -124,6 +252,9 @@ padding:40px;
 }
 
 .hero-box{
+position:relative;
+overflow:hidden;
+
 background:rgba(255,255,255,0.06);
 padding:50px;
 border-radius:24px;
@@ -151,15 +282,12 @@ opacity:0.9;
 line-height:1.8;
 margin-bottom:30px;
 }
-.hero-box{
-position:relative;
-overflow:hidden;
-}
 
 .hero-box::before{
 content:"";
 position:absolute;
 inset:-200%;
+
 background:
 linear-gradient(
 120deg,
@@ -170,8 +298,7 @@ transparent
 
 transform:rotate(25deg);
 
-animation:
-shine 7s linear infinite;
+animation:shine 7s linear infinite;
 }
 
 @keyframes shine{
@@ -189,6 +316,7 @@ rotate(25deg);
 }
 
 }
+
 .hero-btn{
 display:inline-block;
 padding:14px 35px;
@@ -258,9 +386,14 @@ position:relative;
 content:"";
 position:absolute;
 inset:0;
-background:linear-gradient(135deg,
+
+background:
+linear-gradient(
+135deg,
 rgba(0,200,255,0.08),
-rgba(220,120,255,0.06));
+rgba(220,120,255,0.06)
+);
+
 opacity:0;
 transition:0.4s;
 }
@@ -349,72 +482,69 @@ margin-top:50px;
    ANIMATION
 ========================= */
 
+/* =========================
+   SLIDE IN ANIMATION
+========================= */
+
 .fade{
 opacity:0;
-transform:translateY(40px);
-transition:1s;
+transform:translateX(-70px);
+transition:
+opacity 0.8s ease,
+transform 0.8s cubic-bezier(.2,.8,.2,1);
 }
 
 .fade.show{
 opacity:1;
-transform:translateY(0);
+transform:translateX(0);
 }
 
 @keyframes fadeUp{
+
 from{
 opacity:0;
 transform:translateY(40px);
 }
+
 to{
 opacity:1;
 transform:translateY(0);
 }
+
 }
 
 /* =========================
-   RESPONSIVE
+   上から順番に表示
 ========================= */
 
-@media(max-width:768px){
-
-header{
-padding:16px 20px;
+#about .section-title{
+transition-delay:0s;
 }
 
-nav{
-gap:15px;
-flex-wrap:wrap;
-justify-content:flex-end;
-left:auto;
-display:flex;
-justify-content:flex-start;
-align-items:flex-start;
+#about .card:nth-child(1){
+transition-delay:0.12s;
 }
 
-.hero h1{
-font-size:2.5rem;
+#about .card:nth-child(2){
+transition-delay:0.24s;
 }
 
-.hero-box{
-padding:35px 25px;
+#access .section-title{
+transition-delay:0s;
 }
 
-.section-title{
-font-size:1.7rem;
+#access .card{
+transition-delay:0.15s;
 }
 
+footer{
+transition-delay:0.1s;
 }
+
 /* =========================
    HEADER ANIMATION
 ========================= */
 
-header{
-transition:
-transform 0.45s ease,
-opacity 0.45s ease;
-}
-
-/* 消える */
 .hide-header{
 transform:translateY(-120%);
 opacity:0;
@@ -429,27 +559,36 @@ pointer-events:none;
 position:fixed;
 top:20px;
 right:20px;
+
 width:54px;
 height:54px;
+
 border:none;
 border-radius:14px;
+
 background:rgba(0,0,0,0.55);
 backdrop-filter:blur(8px);
+
 cursor:pointer;
+
 display:flex;
 flex-direction:column;
 justify-content:center;
 align-items:center;
+
 gap:6px;
+
 z-index:2000;
 
 opacity:0;
 pointer-events:none;
-transform:translateY(-20px);
+
+transform:translateY(-10px);
 
 transition:
-0.35s,
-box-shadow 0.35s;
+opacity 0.2s ease,
+transform 0.2s ease,
+box-shadow 0.25s ease;
 }
 
 .menu-btn.show-btn{
@@ -469,10 +608,11 @@ width:28px;
 height:3px;
 border-radius:999px;
 background:white;
-transition:0.35s;
+transition:0.3s;
 }
 
 /* ×変形 */
+
 .menu-btn.active span:nth-child(1){
 transform:
 translateY(9px)
@@ -488,8 +628,9 @@ transform:
 translateY(-9px)
 rotate(-45deg);
 }
+
 /* =========================
-   MOBILE MENU BASE
+   MOBILE MENU
 ========================= */
 
 .mobile-menu{
@@ -497,29 +638,68 @@ position:fixed;
 top:0;
 right:-100%;
 
-width:300px;
+width:min(300px,85vw);
 height:100vh;
 
 background:rgba(10,10,20,0.97);
 backdrop-filter:blur(18px);
+-webkit-backdrop-filter:blur(18px);
 
 display:flex;
 flex-direction:column;
 
-padding:120px 35px;
+padding:110px 35px 40px;
+
 gap:28px;
 
-transition:0.45s ease;
+transition:0.3s ease;
 
 z-index:1900;
+
+box-shadow:-15px 0 40px rgba(0,0,0,0.3);
 }
 
-/* 開いた */
 .mobile-menu.open{
 right:0;
 }
 
-/* リンク */
+/* =========================
+   MOBILE MENU
+========================= */
+
+.mobile-menu{
+position:fixed;
+top:0;
+right:-100%;
+
+width:min(300px,85vw);
+height:100vh;
+
+background:rgba(10,10,20,0.97);
+backdrop-filter:blur(18px);
+-webkit-backdrop-filter:blur(18px);
+
+display:flex;
+flex-direction:column;
+
+padding:110px 35px 40px;
+gap:28px;
+
+transition:0.3s ease;
+
+z-index:1900;
+
+box-shadow:-15px 0 40px rgba(0,0,0,0.3);
+}
+
+.mobile-menu.open{
+right:0;
+}
+
+/* =========================
+   MENU LINK SLIDE IN
+========================= */
+
 .mobile-menu a{
 color:white;
 text-decoration:none;
@@ -529,7 +709,41 @@ padding-bottom:12px;
 border-bottom:
 1px solid rgba(255,255,255,0.08);
 
-transition:0.3s;
+/* 最初は右側へ隠す */
+opacity:0;
+transform:translateX(70px);
+
+transition:
+opacity 0.45s ease,
+transform 0.45s cubic-bezier(.2,.8,.2,1),
+color 0.25s ease,
+padding-left 0.25s ease;
+}
+
+/* メニューを開いたら表示 */
+.mobile-menu.open a{
+opacity:1;
+transform:translateX(0);
+}
+
+/* 1個目 */
+.mobile-menu.open a:nth-child(1){
+transition-delay:0.08s;
+}
+
+/* 2個目 */
+.mobile-menu.open a:nth-child(2){
+transition-delay:0.23s;
+}
+
+/* 3個目 */
+.mobile-menu.open a:nth-child(3){
+transition-delay:0.38s;
+}
+
+/* 4個目 */
+.mobile-menu.open a:nth-child(4){
+transition-delay:0.48s;
 }
 
 .mobile-menu a:hover{
@@ -581,10 +795,10 @@ translateY(30px)
 scale(0.9);
 
 transition:
-0.4s ease;
+opacity 0.4s ease,
+transform 0.4s ease;
 }
 
-/* 表示 */
 #backToTop.show{
 opacity:1;
 pointer-events:auto;
@@ -594,7 +808,6 @@ translateY(0)
 scale(1);
 }
 
-/* ホバー */
 #backToTop:hover{
 transform:
 translateY(-6px)
@@ -605,7 +818,6 @@ box-shadow:
 0 0 45px rgba(200,120,255,0.45);
 }
 
-/* 浮遊 */
 #backToTop{
 animation:
 floatBtn 3s ease-in-out infinite;
@@ -614,19 +826,19 @@ floatBtn 3s ease-in-out infinite;
 @keyframes floatBtn{
 
 0%{
-transform:translateY(0);
+margin-bottom:0;
 }
 
 50%{
-transform:translateY(-8px);
+margin-bottom:8px;
 }
 
 100%{
-transform:translateY(0);
+margin-bottom:0;
 }
 
-
 }
+
 /* =========================
    MENU OVERLAY
 ========================= */
@@ -643,16 +855,16 @@ backdrop-filter:blur(8px);
 opacity:0;
 pointer-events:none;
 
-transition:0.35s ease;
+transition:0.25s ease;
 
 z-index:1800;
 }
 
-/* 表示 */
 .menu-overlay.show{
 opacity:1;
 pointer-events:auto;
 }
+
 /* =========================
    LOADING SCREEN
 ========================= */
@@ -680,24 +892,23 @@ opacity 1s ease,
 visibility 1s ease;
 }
 
-/* 消える */
 #loadingScreen.hide{
 opacity:0;
 visibility:hidden;
 }
 
-/* 背景演出 */
 .loading-bg{
 position:absolute;
 inset:0;
 
 background:
-radial-gradient(circle at center,
+radial-gradient(
+circle at center,
 rgba(120,220,255,0.18),
-transparent 60%);
+transparent 60%
+);
 
-animation:
-pulseBg 4s ease infinite;
+animation:pulseBg 4s ease infinite;
 }
 
 @keyframes pulseBg{
@@ -719,7 +930,6 @@ opacity:0.6;
 
 }
 
-/* ガラスボックス */
 .loading-box{
 position:relative;
 z-index:2;
@@ -744,7 +954,6 @@ box-shadow:
 text-align:center;
 }
 
-/* タイトル */
 .loading-title{
 font-size:clamp(2.2rem,7vw,4rem);
 
@@ -765,7 +974,8 @@ text-shadow:
 0 0 20px rgba(255,255,255,0.15);
 
 animation:
-titleGlow 2.5s ease infinite;
+titleGlow 2.5s ease infinite,
+floatTitle 4s ease-in-out infinite;
 }
 
 @keyframes titleGlow{
@@ -784,7 +994,6 @@ filter:brightness(1);
 
 }
 
-/* バー */
 .loading-bar{
 width:100%;
 height:14px;
@@ -800,7 +1009,6 @@ box-shadow:
 inset 0 0 10px rgba(255,255,255,0.1);
 }
 
-/* 進行バー */
 .loading-fill{
 height:100%;
 width:0%;
@@ -846,7 +1054,6 @@ width:100%;
 
 }
 
-/* テキスト */
 .loading-text{
 margin-top:20px;
 
@@ -870,7 +1077,7 @@ opacity:1;
 }
 
 }
-/* サブ文章 */
+
 .loading-sub{
 margin-bottom:28px;
 
@@ -903,11 +1110,6 @@ opacity:0.5;
 }
 
 }
-.loading-title{
-animation:
-titleGlow 2.5s ease infinite,
-floatTitle 4s ease-in-out infinite;
-}
 
 @keyframes floatTitle{
 
@@ -924,21 +1126,193 @@ transform:translateY(0px);
 }
 
 }
-.logo-icon{
-  width:38px;
-  height:38px;
-  cursor:pointer;
-  filter: drop-shadow(0 0 6px rgba(57,213,255,.8));
-  transition:0.3s;
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:768px){
+
+header{
+padding:14px 18px;
 }
 
-.logo-icon:hover{
-  transform:scale(1.15) rotate(10deg);
+.logo-wrap{
+gap:9px;
 }
+
+.logo-icon{
+width:34px;
+height:34px;
+}
+
+.logo{
+font-size:1.15rem;
+letter-spacing:1px;
+}
+
+nav{
+display:none;
+}
+
+/* スマホではハンバーガーを常時表示 */
+
+.menu-btn{
+opacity:1;
+pointer-events:auto;
+transform:translateY(0);
+
+top:14px;
+right:14px;
+
+width:50px;
+height:50px;
+}
+
+.hero{
+min-height:100svh;
+padding:25px 15px;
+}
+
+.hero-box{
+width:100%;
+padding:35px 20px;
+border-radius:20px;
+}
+
+.hero h1{
+font-size:clamp(2.5rem,13vw,4rem);
+}
+
+.hero p{
+font-size:1rem;
+line-height:1.8;
+}
+
+.hero-btn{
+padding:13px 28px;
+}
+
+section{
+padding:85px 16px;
+}
+
+.section-title{
+font-size:1.7rem;
+margin-bottom:35px;
+}
+
+.grid{
+grid-template-columns:1fr;
+gap:20px;
+}
+
+.card{
+padding:20px;
+border-radius:17px;
+}
+
+.card p{
+font-size:0.95rem;
+line-height:1.8;
+}
+
+.card:hover{
+transform:translateY(-5px);
+}
+
+#access .card{
+padding:20px;
+}
+
+footer{
+padding:30px 20px;
+}
+
+#backToTop{
+right:16px;
+bottom:16px;
+width:52px;
+height:52px;
+font-size:19px;
+}
+
+.mobile-menu{
+padding:
+100px 25px 30px;
+
+gap:22px;
+}
+
+.mobile-menu a{
+font-size:1.1rem;
+}
+
+.logo-modal{
+padding:20px;
+}
+
+.logo-modal-content{
+max-width:94vw;
+max-height:80vh;
+}
+
+.logo-modal-content img{
+max-width:94vw;
+max-height:80vh;
+border-radius:15px;
+}
+
+.logo-modal-close{
+top:-12px;
+right:-12px;
+width:42px;
+height:42px;
+font-size:22px;
+}
+
+}
+
+@media(max-width:400px){
+
+.logo{
+font-size:1rem;
+}
+
+.logo-icon{
+width:31px;
+height:31px;
+}
+
+.menu-btn{
+width:46px;
+height:46px;
+}
+
+.menu-btn span{
+width:24px;
+}
+
+.hero-box{
+padding:30px 17px;
+}
+
+.section-title{
+font-size:1.5rem;
+}
+
+}
+
 </style>
+
 </head>
 
 <body>
+
+<!-- =========================
+     LOADING
+========================= -->
+
 <div id="loadingScreen">
 
 <div class="loading-bg"></div>
@@ -963,26 +1337,72 @@ NOW LOADING...
 
 </div>
 </div>
+
+<!-- =========================
+     HEADER
+========================= -->
+
 <header>
 
 <div class="logo-wrap">
-    <img src="アイコン.png" class="logo-icon" alt="logo">
-    <div class="logo">なんでもや</div>
-  </div>
+
+<img
+src="アイコン.png"
+class="logo-icon"
+alt="logo"
+title="ロゴを拡大">
+
+<div class="logo">
+なんでもや
+</div>
+
+</div>
+
 <nav>
 <a href="#about">企画概要</a>
 <a href="#access">アクセス</a>
 </nav>
-</header>
-<div class="menu-overlay"></div>
-<!-- ハンバーガーメニュー -->
-<div class="mobile-menu">
 
-<a href="#about">企画概要</a>
-<a href="#access">アクセス</a>
+</header>
+
+<!-- =========================
+     LOGO MODAL
+========================= -->
+
+<div class="logo-modal" id="logoModal">
+
+<div class="logo-modal-content">
+
+<button
+class="logo-modal-close"
+id="logoModalClose"
+aria-label="閉じる">
+× </button>
+
+<img
+src="アイコン.png"
+alt="なんでもや ロゴ">
 
 </div>
-<!-- HERO -->
+
+</div>
+
+<div class="menu-overlay"></div>
+
+<!-- =========================
+     MOBILE MENU
+========================= -->
+
+<div class="mobile-menu">
+
+<a href="#about">企画概要</a> <a href="#access">アクセス</a>
+
+</div>
+
+<!-- =========================
+     HERO
+========================= -->
+
 <div class="hero">
 
 <div class="hero-box">
@@ -999,9 +1419,13 @@ NOW LOADING...
 </a>
 
 </div>
+
 </div>
 
-<!-- ABOUT -->
+<!-- =========================
+     ABOUT
+========================= -->
+
 <section id="about">
 
 <h2 class="section-title fade">
@@ -1012,9 +1436,8 @@ NOW LOADING...
 
 <div class="card fade">
 
-
 <p>
-&emsp;あなた暇人ですか？暇人ですよね？<br>
+&emsp;あなた暇ですか？暇ですよね？<br>
 &emsp;暇人だったら時間有り余ってますよね？<br>
 &emsp;時間潰す場所探してませんか？<br>
 &emsp;ではぜひここに来てみませんか？<br>
@@ -1023,31 +1446,24 @@ NOW LOADING...
 </p>
 
 </div>
+
 <div class="card fade">
+
 <p>
-    &emsp;この企画ではクロスワードやタイピング勝負、レンタル本郷生などその他のいろいろなことをやっているので
+&emsp;この企画ではクロスワードやタイピング勝負、レンタル本郷生などその他のいろいろなことをやっているので
 時間の使い方に困ったら来てみてください。お客様の要望、予算と常識の範囲内で叶えます！
 </p>
-</div>
-<!--<div class="card fade">
-<img src="">
-
-<h3>〇〇エリア</h3>
-
-<p>
-</p>
 
 </div>
--->
 
 </div>
 
 </section>
 
+<!-- =========================
+     ACCESS
+========================= -->
 
-
-
-<!-- ACCESS -->
 <section id="access">
 
 <h2 class="section-title fade">
@@ -1062,7 +1478,8 @@ NOW LOADING...
 開催日：2026年9月26日,9月27日<br>
 場所：本郷中学校 1号館英会話教室1 <br><br>
 
-暇人たちの来場を待っています。
+暇な人たちの来場を待っています。
+
 </p>
 
 </div>
@@ -1072,16 +1489,29 @@ NOW LOADING...
 <footer class="fade">
 © 2026 なんでもや
 </footer>
-<!-- 上へ戻るボタン -->
-<button id="backToTop">▲</button>
+
+<!-- =========================
+     BACK TO TOP
+========================= -->
+
+<button id="backToTop">
+▲
+</button>
+
 <script>
+
+/* =========================
+   FADE ANIMATION
+========================= */
 
 const observer = new IntersectionObserver((entries)=>{
 
 entries.forEach(entry=>{
 
 if(entry.isIntersecting){
+
 entry.target.classList.add("show");
+
 }
 
 });
@@ -1094,22 +1524,29 @@ document.querySelectorAll(".fade").forEach(el=>{
 observer.observe(el);
 });
 
-document.querySelectorAll(".fade").forEach(el=>{
-observer.observe(el);
-});
-
 
 /* =========================
    HEADER & HAMBURGER
 ========================= */
 
-const header = document.querySelector("header");
-const mobileMenu = document.querySelector(".mobile-menu");
+const header =
+document.querySelector("header");
+
+const mobileMenu =
+document.querySelector(".mobile-menu");
+
 
 /* ハンバーガー生成 */
-const menuBtn = document.createElement("button");
+
+const menuBtn =
+document.createElement("button");
 
 menuBtn.classList.add("menu-btn");
+
+menuBtn.setAttribute(
+"aria-label",
+"メニューを開く"
+);
 
 menuBtn.innerHTML = `
 <span></span>
@@ -1118,6 +1555,7 @@ menuBtn.innerHTML = `
 `;
 
 document.body.appendChild(menuBtn);
+
 
 /* =========================
    MENU OPEN
@@ -1129,10 +1567,14 @@ document.querySelector(".menu-overlay");
 menuBtn.addEventListener("click", ()=>{
 
 mobileMenu.classList.toggle("open");
+
 menuBtn.classList.toggle("active");
+
 overlay.classList.toggle("show");
 
 });
+
+
 /* =========================
    OVERLAY CLOSE
 ========================= */
@@ -1140,10 +1582,14 @@ overlay.classList.toggle("show");
 overlay.addEventListener("click", ()=>{
 
 mobileMenu.classList.remove("open");
+
 menuBtn.classList.remove("active");
+
 overlay.classList.remove("show");
 
 });
+
+
 /* =========================
    SCROLL
 ========================= */
@@ -1152,35 +1598,54 @@ let lastScroll = 0;
 
 window.addEventListener("scroll", ()=>{
 
-const currentScroll = window.pageYOffset;
+const currentScroll =
+window.pageYOffset;
+
 
 /* 下へスクロール */
-if(currentScroll > lastScroll && currentScroll > 100){
+
+if(
+currentScroll > lastScroll &&
+currentScroll > 30
+){
 
 header.classList.add("hide-header");
 
-/* ボタン表示 */
+/* 30pxで表示 */
+
 menuBtn.classList.add("show-btn");
 
 }
 
 /* 上へスクロール */
+
 else{
 
 header.classList.remove("hide-header");
 
-/* ボタン非表示 */
+if(currentScroll <= 30){
+
 menuBtn.classList.remove("show-btn");
 
+}
+
 /* メニュー閉じる */
-mobileMenu.classList.remove("open");
+
+if(
+!mobileMenu.classList.contains("open")
+){
+
 menuBtn.classList.remove("active");
+overlay.classList.remove("show");
+
+}
 
 }
 
 lastScroll = currentScroll;
 
 });
+
 
 /* =========================
    BACK TO TOP
@@ -1189,7 +1654,7 @@ lastScroll = currentScroll;
 const backToTop =
 document.getElementById("backToTop");
 
-/* スクロールで表示 */
+
 window.addEventListener("scroll", ()=>{
 
 if(window.scrollY > 350){
@@ -1204,27 +1669,118 @@ backToTop.classList.remove("show");
 
 });
 
+
 /* 押したら上へ */
+
 backToTop.addEventListener("click", ()=>{
 
 window.scrollTo({
+
 top:0,
 behavior:"smooth"
+
 });
 
 });
+
+
+/* =========================
+   MOBILE MENU LINK
+========================= */
+
 document.querySelectorAll(".mobile-menu a")
 .forEach(link=>{
 
-link.addEventListener("click",()=>{
+link.addEventListener("click", ()=>{
 
 mobileMenu.classList.remove("open");
+
 menuBtn.classList.remove("active");
+
 overlay.classList.remove("show");
 
 });
 
 });
+
+
+/* =========================
+   LOGO IMAGE MODAL
+========================= */
+
+const logoIcon =
+document.querySelector(".logo-icon");
+
+const logoModal =
+document.getElementById("logoModal");
+
+const logoModalClose =
+document.getElementById("logoModalClose");
+
+const logoModalContent =
+document.querySelector(".logo-modal-content");
+
+
+/* ロゴクリック */
+
+logoIcon.addEventListener("click", ()=>{
+
+logoModal.classList.add("show");
+
+document.body.style.overflow="hidden";
+
+});
+
+
+/* 閉じる */
+
+logoModalClose.addEventListener("click", (event)=>{
+
+event.stopPropagation();
+
+closeLogoModal();
+
+});
+
+
+/* 背景クリックで閉じる */
+
+logoModal.addEventListener("click", (event)=>{
+
+if(event.target === logoModal){
+
+closeLogoModal();
+
+}
+
+});
+
+
+/* Escキーで閉じる */
+
+document.addEventListener("keydown", (event)=>{
+
+if(
+event.key === "Escape" &&
+logoModal.classList.contains("show")
+){
+
+closeLogoModal();
+
+}
+
+});
+
+
+function closeLogoModal(){
+
+logoModal.classList.remove("show");
+
+document.body.style.overflow="";
+
+}
+
+
 /* =========================
    LOADING SCREEN
 ========================= */
@@ -1241,6 +1797,7 @@ loading.classList.add("hide");
 },1500);
 
 });
+
 </script>
 
 </body>
