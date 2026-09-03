@@ -838,7 +838,20 @@ margin-bottom:0;
 }
 
 }
+#backToTop{
+    opacity:0;
+    visibility:hidden;
+    pointer-events:none;
+    transition:
+        opacity 0.3s ease,
+        visibility 0.3s ease;
+}
 
+#backToTop.show{
+    opacity:1;
+    visibility:visible;
+    pointer-events:auto;
+}
 /* =========================
    MENU OVERLAY
 ========================= */
@@ -1302,7 +1315,128 @@ font-size:1.5rem;
 }
 
 }
+/* =========================
+   SLIDE IN DIRECTIONS
+========================= */
 
+/* 左から */
+.slide-left{
+    opacity:0;
+    transform:translateX(-80px);
+    transition:
+        opacity 0.8s ease,
+        transform 0.8s cubic-bezier(.2,.8,.2,1);
+}
+
+.slide-left.show{
+    opacity:1;
+    transform:translateX(0);
+}
+
+
+/* 右から */
+.slide-right{
+    opacity:0;
+    transform:translateX(80px);
+    transition:
+        opacity 0.8s ease,
+        transform 0.8s cubic-bezier(.2,.8,.2,1);
+}
+
+.slide-right.show{
+    opacity:1;
+    transform:translateX(0);
+}
+
+
+/* 下から */
+.slide-up{
+    opacity:0;
+    transform:translateY(80px);
+    transition:
+        opacity 0.8s ease,
+        transform 0.8s cubic-bezier(.2,.8,.2,1);
+}
+
+.slide-up.show{
+    opacity:1;
+    transform:translateY(0);
+}
+
+
+/* 上から */
+.slide-down{
+    opacity:0;
+    transform:translateY(-80px);
+    transition:
+        opacity 0.8s ease,
+        transform 0.8s cubic-bezier(.2,.8,.2,1);
+}
+
+.slide-down.show{
+    opacity:1;
+    transform:translateY(0);
+}
+
+
+/* 左下から */
+.slide-left-up{
+    opacity:0;
+    transform:translate(-80px,80px);
+    transition:
+        opacity 0.8s ease,
+        transform 0.8s cubic-bezier(.2,.8,.2,1);
+}
+
+.slide-left-up.show{
+    opacity:1;
+    transform:translate(0,0);
+}
+
+
+/* 右下から */
+.slide-right-up{
+    opacity:0;
+    transform:translate(80px,80px);
+    transition:
+        opacity 0.8s ease,
+        transform 0.8s cubic-bezier(.2,.8,.2,1);
+}
+
+.slide-right-up.show{
+    opacity:1;
+    transform:translate(0,0);
+}
+
+
+/* 左上から */
+.slide-left-down{
+    opacity:0;
+    transform:translate(-80px,-80px);
+    transition:
+        opacity 0.8s ease,
+        transform 0.8s cubic-bezier(.2,.8,.2,1);
+}
+
+.slide-left-down.show{
+    opacity:1;
+    transform:translate(0,0);
+}
+
+
+/* 右上から */
+.slide-right-down{
+    opacity:0;
+    transform:translate(80px,-80px);
+    transition:
+        opacity 0.8s ease,
+        transform 0.8s cubic-bezier(.2,.8,.2,1);
+}
+
+.slide-right-down.show{
+    opacity:1;
+    transform:translate(0,0);
+}
 </style>
 
 </head>
@@ -1405,7 +1539,7 @@ alt="なんでもや ロゴ">
 
 <div class="hero">
 
-<div class="hero-box">
+<div class="hero-box slide-down">
 
 <h1>なんでもや</h1>
 
@@ -1428,13 +1562,13 @@ alt="なんでもや ロゴ">
 
 <section id="about">
 
-<h2 class="section-title fade">
+<h2 class="section-title fade slide-up">
 企画概要
 </h2>
 
 <div class="grid">
 
-<div class="card fade">
+<div class="card fade slide-left">
 
 <p>
 &emsp;あなた暇ですか？暇ですよね？<br>
@@ -1447,7 +1581,7 @@ alt="なんでもや ロゴ">
 
 </div>
 
-<div class="card fade">
+<div class="card fade slide-right">
 
 <p>
 &emsp;この企画ではクロスワードやタイピング勝負、レンタル本郷生などその他のいろいろなことをやっているので
@@ -1466,11 +1600,11 @@ alt="なんでもや ロゴ">
 
 <section id="access">
 
-<h2 class="section-title fade">
+<h2 class="section-title fade slide-up">
 アクセス
 </h2>
 
-<div class="card fade">
+<div class="card fade slide-left">
 
 <h3>本郷中学 文化祭会場</h3>
 
@@ -1486,7 +1620,7 @@ alt="なんでもや ロゴ">
 
 </section>
 
-<footer class="fade">
+<footer class="fade slide-down">
 © 2026 なんでもや
 </footer>
 
@@ -1500,29 +1634,36 @@ alt="なんでもや ロゴ">
 
 <script>
 
-/* =========================
-   FADE ANIMATION
-========================= */
+// ========================================
+// Fade / Slide-in
+// ローディング終了後に開始
+// ========================================
 
-const observer = new IntersectionObserver((entries)=>{
+const slideTargets = document.querySelectorAll(
+  ".fade, .slide-left, .slide-right, .slide-up, .slide-down, " +
+  ".slide-left-up, .slide-right-up, .slide-left-down, .slide-right-down"
+);
 
-entries.forEach(entry=>{
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add("show");
+      observer.unobserve(entry.target);
+    }
+  });
+}, {
+  threshold: 0.15
+});
 
-if(entry.isIntersecting){
 
-entry.target.classList.add("show");
-
+// ローディングが完全に終了してから監視開始
+function startSlideAnimations() {
+  slideTargets.forEach(el => {
+    observer.observe(el);
+  });
 }
 
-});
 
-},{
-threshold:0.15
-});
-
-document.querySelectorAll(".fade").forEach(el=>{
-observer.observe(el);
-});
 
 
 /* =========================
@@ -1651,36 +1792,28 @@ lastScroll = currentScroll;
    BACK TO TOP
 ========================= */
 
-const backToTop =
-document.getElementById("backToTop");
+const backToTop = document.getElementById("backToTop");
 
-
-window.addEventListener("scroll", ()=>{
-
-if(window.scrollY > 350){
-
-backToTop.classList.add("show");
-
-}else{
-
-backToTop.classList.remove("show");
-
+function updateBackToTop() {
+  if (window.scrollY <= 10) {
+    // 一番上
+    backToTop.classList.remove("show");
+  } else {
+    // 少しでも下にスクロール
+    backToTop.classList.add("show");
+  }
 }
 
-});
+window.addEventListener("scroll", updateBackToTop);
 
+// 初期状態もチェック
+updateBackToTop();
 
-/* 押したら上へ */
-
-backToTop.addEventListener("click", ()=>{
-
-window.scrollTo({
-
-top:0,
-behavior:"smooth"
-
-});
-
+backToTop.addEventListener("click", () => {
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
 });
 
 
@@ -1785,16 +1918,20 @@ document.body.style.overflow="";
    LOADING SCREEN
 ========================= */
 
-window.addEventListener("load", ()=>{
+window.addEventListener("load", () => {
 
-const loading =
-document.getElementById("loadingScreen");
+  const loading = document.getElementById("loadingScreen");
 
-setTimeout(()=>{
+  // ローディングバーが終わるタイミング
+  setTimeout(() => {
 
-loading.classList.add("hide");
+    // ローディング画面を消す
+    loading.classList.add("hide");
 
-},1500);
+    // すぐにスライド演出を開始
+    startSlideAnimations();
+
+  }, 2800);
 
 });
 
@@ -1802,4 +1939,3 @@ loading.classList.add("hide");
 
 </body>
 </html>
-
